@@ -1,0 +1,1085 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>867</width>
+    <height>730</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>826</width>
+    <height>496</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Productline Config</string>
+  </property>
+  <property name="sizeGripEnabled">
+   <bool>true</bool>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_8">
+   <item row="0" column="0">
+    <widget class="QCheckBox" name="checkbox_burn_switch">
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>烧录</string>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>18</width>
+       <height>20</height>
+      </size>
+     </property>
+     <property name="autoRepeatInterval">
+      <number>97</number>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QCheckBox" name="checkbox_factory_switch">
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>工厂模式</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <layout class="QGridLayout" name="gridLayout_7" columnstretch="4,0,0">
+     <item row="0" column="2">
+      <widget class="QPushButton" name="push_btn_exit">
+       <property name="font">
+        <font>
+         <family>Arial</family>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>退出</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QGroupBox" name="groupBox_factorymode_setting">
+       <property name="font">
+        <font>
+         <family>Arial</family>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+       <property name="title">
+        <string>工厂模式设置</string>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_6">
+        <item row="0" column="0">
+         <widget class="QCheckBox" name="factorymode_calib_switch">
+          <property name="font">
+           <font>
+            <pointsize>9</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>校准</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QCheckBox" name="factorymode_connect_switch">
+          <property name="font">
+           <font>
+            <pointsize>9</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>连接</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QPushButton" name="push_btn_save">
+       <property name="font">
+        <font>
+         <family>Arial</family>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>保存</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="1" column="0">
+    <widget class="QGroupBox" name="groupBox_burn_setting">
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="title">
+      <string>烧录设置</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <layout class="QGridLayout" name="gridLayout">
+        <item row="0" column="0">
+         <widget class="QCheckBox" name="chkbox_app">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QLabel" name="label_app">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string> APP</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <widget class="QLineEdit" name="lineedit_bin_path_1">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="3">
+         <widget class="QPushButton" name="push_btn_browse_1">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>浏览 &gt;&gt;</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="4">
+         <widget class="QCheckBox" name="chkbox_appcrc">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="layoutDirection">
+           <enum>Qt::RightToLeft</enum>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="5">
+         <widget class="QLabel" name="label_bin_verify">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>9</pointsize>
+            <weight>50</weight>
+            <bold>false</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>CRC32:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="6">
+         <widget class="QLineEdit" name="lineedit_hash_1">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>80</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>9</pointsize>
+           </font>
+          </property>
+          <property name="focusPolicy">
+           <enum>Qt::StrongFocus</enum>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="maxLength">
+           <number>8</number>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QCheckBox" name="chkbox_boot">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLabel" name="label_boot">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>OTA BOOT</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="2">
+         <widget class="QLineEdit" name="lineedit_bin_path_2">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="3">
+         <widget class="QPushButton" name="push_btn_browse_2">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>浏览 &gt;&gt;</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="4">
+         <widget class="QCheckBox" name="chkbox_bootcrc">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="layoutDirection">
+           <enum>Qt::RightToLeft</enum>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="5">
+         <widget class="QLabel" name="label_bin_verify_2">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>9</pointsize>
+            <weight>50</weight>
+            <bold>false</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>CRC32:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="6">
+         <widget class="QLineEdit" name="lineedit_hash_2">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>80</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>9</pointsize>
+           </font>
+          </property>
+          <property name="focusPolicy">
+           <enum>Qt::StrongFocus</enum>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="maxLength">
+           <number>8</number>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QGridLayout" name="gridLayout_2" rowstretch="0,0,0" columnstretch="1,2,2">
+        <item row="2" column="1" colspan="2">
+         <widget class="QLabel" name="label_20">
+          <property name="styleSheet">
+           <string notr="true">color:rgb(255, 0, 0)</string>
+          </property>
+          <property name="text">
+           <string>(如果勾选，则修改出厂区域信息。)</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QCheckBox" name="checkbox_update_sector">
+          <property name="text">
+           <string>更新分区</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0" colspan="3">
+         <widget class="QCheckBox" name="chkbox_filename">
+          <property name="text">
+           <string>Bin文件的名称作为bt名称</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QCheckBox" name="checkbox_erase_whole">
+          <property name="text">
+           <string>擦除整个 flash</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QLabel" name="label_21">
+          <property name="styleSheet">
+           <string notr="true">color:rgb(255, 0, 0)</string>
+          </property>
+          <property name="text">
+           <string>(如果勾选，整个芯片闪存将被擦除。)</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="groupBox">
+        <property name="title">
+         <string>出厂分区设置</string>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout">
+         <item>
+          <layout class="QGridLayout" name="gridLayout_3" columnstretch="2,2,4,1,2,1,1,3,2,4">
+           <property name="sizeConstraint">
+            <enum>QLayout::SetNoConstraint</enum>
+           </property>
+           <item row="0" column="4">
+            <widget class="QCheckBox" name="checkBox_burnnum">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="text">
+              <string>最大烧录数:</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="5" colspan="2">
+            <widget class="QLineEdit" name="lineedit_maxburnnum">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="7">
+            <widget class="QLabel" name="label_2">
+             <property name="font">
+              <font>
+               <family>Arial</family>
+               <pointsize>9</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>NAP</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="8">
+            <widget class="QLabel" name="label_3">
+             <property name="font">
+              <font>
+               <family>Arial</family>
+               <pointsize>9</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>UAP</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="9">
+            <widget class="QLabel" name="label_4">
+             <property name="font">
+              <font>
+               <family>Arial</family>
+               <pointsize>9</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>LAP</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QCheckBox" name="checkBox_blename">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QLabel" name="label_15">
+             <property name="font">
+              <font>
+               <family>Arial</family>
+               <pointsize>9</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>BLE 名称:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="2" colspan="2">
+            <widget class="QLineEdit" name="lineedit_blename">
+             <property name="font">
+              <font>
+               <family>Arial</family>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
+             <property name="focusPolicy">
+              <enum>Qt::StrongFocus</enum>
+             </property>
+             <property name="maxLength">
+              <number>256</number>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="5">
+            <widget class="QCheckBox" name="checkBox_btaddr">
+             <property name="layoutDirection">
+              <enum>Qt::RightToLeft</enum>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="6">
+            <widget class="QLabel" name="label">
+             <property name="font">
+              <font>
+               <family>Arial</family>
+               <pointsize>9</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>BT 地址:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="7">
+            <widget class="QLineEdit" name="lineedit_btnap">
+             <property name="font">
+              <font>
+               <family>Arial</family>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
+             <property name="focusPolicy">
+              <enum>Qt::StrongFocus</enum>
+             </property>
+             <property name="maxLength">
+              <number>4</number>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="8">
+            <widget class="QLineEdit" name="lineedit_btuap">
+             <property name="font">
+              <font>
+               <family>Arial</family>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
+             <property name="focusPolicy">
+              <enum>Qt::StrongFocus</enum>
+             </property>
+             <property name="maxLength">
+              <number>2</number>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="9">
+            <widget class="QLineEdit" name="lineedit_btlap">
+             <property name="font">
+              <font>
+               <family>Arial</family>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
+             <property name="focusPolicy">
+              <enum>Qt::StrongFocus</enum>
+             </property>
+             <property name="maxLength">
+              <number>6</number>
+             </property>
+             <property name="frame">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0" colspan="2">
+            <widget class="QLabel" name="label_17">
+             <property name="text">
+              <string>蓝牙地址生成类型：</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="2">
+            <widget class="QComboBox" name="combbx_addr_gen_type"/>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QGridLayout" name="gridLayout_4">
+           <item row="0" column="2">
+            <widget class="QLabel" name="label_8">
+             <property name="text">
+              <string>NAP</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="4" colspan="2">
+            <widget class="QLabel" name="label_6">
+             <property name="text">
+              <string>UAP</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="6">
+            <widget class="QLabel" name="label_9">
+             <property name="text">
+              <string>LAP</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="7">
+            <widget class="QCheckBox" name="checkBox_btname">
+             <property name="layoutDirection">
+              <enum>Qt::RightToLeft</enum>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="8">
+            <widget class="QLabel" name="label_5">
+             <property name="font">
+              <font>
+               <family>Arial</family>
+               <pointsize>9</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>BT名称:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="9" colspan="4">
+            <widget class="QLineEdit" name="lineedit_btname">
+             <property name="font">
+              <font>
+               <family>Arial</family>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
+             <property name="focusPolicy">
+              <enum>Qt::StrongFocus</enum>
+             </property>
+             <property name="maxLength">
+              <number>256</number>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QCheckBox" name="checkBox_bleaddr">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QLabel" name="label_7">
+             <property name="text">
+              <string>BLE 地址:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="2" colspan="2">
+            <widget class="QLineEdit" name="lineedit_blenap">
+             <property name="focusPolicy">
+              <enum>Qt::StrongFocus</enum>
+             </property>
+             <property name="maxLength">
+              <number>4</number>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="4" colspan="2">
+            <widget class="QLineEdit" name="lineedit_bleuap">
+             <property name="focusPolicy">
+              <enum>Qt::StrongFocus</enum>
+             </property>
+             <property name="maxLength">
+              <number>2</number>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="6">
+            <widget class="QLineEdit" name="lineedit_blelap">
+             <property name="focusPolicy">
+              <enum>Qt::StrongFocus</enum>
+             </property>
+             <property name="maxLength">
+              <number>6</number>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="10">
+            <widget class="QLabel" name="label_11">
+             <property name="text">
+              <string>NAP</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="11">
+            <widget class="QLabel" name="label_10">
+             <property name="text">
+              <string>UAP</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="12">
+            <widget class="QLabel" name="label_13">
+             <property name="text">
+              <string>LAP</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QCheckBox" name="checkBox_calib">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1" colspan="4">
+            <widget class="QLabel" name="label_14">
+             <property name="text">
+              <string>默认频偏校准值(20~235):</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="5" colspan="2">
+            <widget class="QLineEdit" name="lineedit_default_calibval">
+             <property name="focusPolicy">
+              <enum>Qt::StrongFocus</enum>
+             </property>
+             <property name="maxLength">
+              <number>8</number>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="7">
+            <widget class="QCheckBox" name="checkBox_conaddr">
+             <property name="layoutDirection">
+              <enum>Qt::RightToLeft</enum>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="8" colspan="2">
+            <widget class="QLabel" name="label_12">
+             <property name="text">
+              <string>连接地址:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="10">
+            <widget class="QLineEdit" name="lineedit_connectornap">
+             <property name="focusPolicy">
+              <enum>Qt::StrongFocus</enum>
+             </property>
+             <property name="maxLength">
+              <number>4</number>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="11">
+            <widget class="QLineEdit" name="lineedit_connectoruap">
+             <property name="focusPolicy">
+              <enum>Qt::StrongFocus</enum>
+             </property>
+             <property name="maxLength">
+              <number>2</number>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="12">
+            <widget class="QLineEdit" name="lineedit_connectorlap">
+             <property name="focusPolicy">
+              <enum>Qt::StrongFocus</enum>
+             </property>
+             <property name="maxLength">
+              <number>6</number>
+             </property>
+             <property name="frame">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QCheckBox" name="checkBox_sn">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1" colspan="2">
+            <widget class="QLabel" name="label_18">
+             <property name="text">
+              <string>SN Gen Type:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="3" colspan="3">
+            <widget class="QComboBox" name="combbx_sn_gen_type"/>
+           </item>
+           <item row="3" column="7" colspan="2">
+            <widget class="QLabel" name="label_19">
+             <property name="layoutDirection">
+              <enum>Qt::RightToLeft</enum>
+             </property>
+             <property name="text">
+              <string>SN(will burn):</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="9" colspan="4">
+            <widget class="QLineEdit" name="lineedit_sn">
+             <property name="font">
+              <font>
+               <family>Arial</family>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
+             <property name="focusPolicy">
+              <enum>Qt::StrongFocus</enum>
+             </property>
+             <property name="maxLength">
+              <number>256</number>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="groupBox_custom">
+        <property name="title">
+         <string>自定义Bin设置</string>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_5">
+         <item row="0" column="0" colspan="2">
+          <widget class="QLabel" name="label_16">
+           <property name="text">
+            <string>芯片版本</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2" colspan="2">
+          <widget class="QComboBox" name="comboBox_chipver"/>
+         </item>
+         <item row="0" column="8">
+          <widget class="QLabel" name="label_22">
+           <property name="text">
+            <string>Flash偏移地址</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QCheckBox" name="chkbox_custom_bin1">
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1" colspan="2">
+          <widget class="QLabel" name="label_custom_bin1">
+           <property name="text">
+            <string>自定义 bin1</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="3" colspan="3">
+          <widget class="QLineEdit" name="lineedit_custom_bin1"/>
+         </item>
+         <item row="1" column="6">
+          <widget class="QPushButton" name="btn_custom_bin_browse1">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="text">
+            <string>浏览 &gt;&gt;</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="7">
+          <widget class="QLabel" name="label_addr1">
+           <property name="text">
+            <string>0x</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="8">
+          <widget class="QLineEdit" name="lineEdit_addr1"/>
+         </item>
+         <item row="2" column="0">
+          <widget class="QCheckBox" name="chkbox_custom_bin2">
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1" colspan="2">
+          <widget class="QLabel" name="label_custom_bin2">
+           <property name="text">
+            <string>自定义 bin2</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="3" colspan="3">
+          <widget class="QLineEdit" name="lineedit_custom_bin2"/>
+         </item>
+         <item row="2" column="6">
+          <widget class="QPushButton" name="btn_custom_bin_browse2">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="text">
+            <string>浏览 &gt;&gt;</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="7">
+          <widget class="QLabel" name="label_addr2">
+           <property name="text">
+            <string>0x</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="8">
+          <widget class="QLineEdit" name="lineEdit_addr2"/>
+         </item>
+         <item row="3" column="0">
+          <widget class="QCheckBox" name="chkbox_custom_bin3">
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1" colspan="2">
+          <widget class="QLabel" name="label_custom_bin3">
+           <property name="text">
+            <string>自定义 bin3</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="3" colspan="3">
+          <widget class="QLineEdit" name="lineedit_custom_bin3"/>
+         </item>
+         <item row="3" column="6">
+          <widget class="QPushButton" name="btn_custom_bin_browse3">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="text">
+            <string>浏览 &gt;&gt;</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="7">
+          <widget class="QLabel" name="label_addr3">
+           <property name="text">
+            <string>0x</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="8">
+          <widget class="QLineEdit" name="lineEdit_addr3"/>
+         </item>
+         <item row="4" column="0">
+          <widget class="QCheckBox" name="chkbox_custom_bin4">
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1" colspan="2">
+          <widget class="QLabel" name="label_custom_bin4">
+           <property name="text">
+            <string>自定义 bin4</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="3" colspan="3">
+          <widget class="QLineEdit" name="lineedit_custom_bin4"/>
+         </item>
+         <item row="4" column="6">
+          <widget class="QPushButton" name="btn_custom_bin_browse4">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="text">
+            <string>浏览 &gt;&gt;</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="7">
+          <widget class="QLabel" name="label_addr4">
+           <property name="text">
+            <string>0x</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="8">
+          <widget class="QLineEdit" name="lineEdit_addr4"/>
+         </item>
+         <item row="5" column="0" colspan="2">
+          <widget class="QLabel" name="label_24">
+           <property name="text">
+            <string>Flash擦除</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="2">
+          <widget class="QCheckBox" name="chkbox_erase_en">
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="3">
+          <widget class="QLabel" name="label_25">
+           <property name="text">
+            <string>擦除长度</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="4">
+          <widget class="QLabel" name="label_addr_erase_2">
+           <property name="text">
+            <string>0x</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="5">
+          <widget class="QLineEdit" name="lineEdit_eraselen"/>
+         </item>
+         <item row="5" column="6">
+          <widget class="QLabel" name="label_23">
+           <property name="text">
+            <string>起始Flash地址</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="7">
+          <widget class="QLabel" name="label_addr_erase">
+           <property name="text">
+            <string>0x</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="8">
+          <widget class="QLineEdit" name="lineEdit_erase_addr"/>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>lineedit_bin_path_1</tabstop>
+  <tabstop>push_btn_browse_1</tabstop>
+  <tabstop>lineedit_hash_1</tabstop>
+  <tabstop>lineedit_bin_path_2</tabstop>
+  <tabstop>push_btn_browse_2</tabstop>
+  <tabstop>lineedit_hash_2</tabstop>
+  <tabstop>lineedit_blenap</tabstop>
+  <tabstop>lineedit_bleuap</tabstop>
+  <tabstop>lineedit_blelap</tabstop>
+  <tabstop>lineedit_default_calibval</tabstop>
+  <tabstop>checkbox_factory_switch</tabstop>
+  <tabstop>factorymode_calib_switch</tabstop>
+  <tabstop>factorymode_connect_switch</tabstop>
+  <tabstop>push_btn_save</tabstop>
+  <tabstop>push_btn_exit</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>
