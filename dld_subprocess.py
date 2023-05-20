@@ -10,12 +10,15 @@ import copy
 import multiprocessing
 import struct
 from ctypes import *
+import ctypes
+import serial
 
 from Crypto.Signature import PKCS1_v1_5 as Signature_pkcs1_v1_5
 from cryptography.hazmat.primitives.hashes import SHA256
 
 from dld_global import *
 from dld_global import GlobModule
+from PyQt5.Qt import QObject
 
 
 class dld_thread(threading.Thread):
@@ -116,6 +119,7 @@ class dld_thread(threading.Thread):
                 self.dldtool.end_encrypt_block()
         elif evt == ev_wm_bin_encrypt_end:
             bes_trace('ev_wm_bin_encrypt_end')
+
         elif evt == ev_wm_burn_magic:
             self.job['childconn'].send(['ev_wm_burn_magic'])
         elif evt == ev_wm_burn_failure:
@@ -177,6 +181,7 @@ class dld_thread(threading.Thread):
     def run(self):
         dld_com = self.com
         # dld_com = self.com.decode('utf-8').encode('gbk')
+
         self.dldtool.handle_buildinfo_to_extend(self.f_file)
         while True:
             time.sleep(0.05)
@@ -205,7 +210,7 @@ class dld_thread(threading.Thread):
                         self.argv.append('-w' + str(self.burn_field_enable_value))
                     for i in range(1, len(self.custom_bin_list)):
                         if self.custom_bin_list[i] != '':
-                            print('%s' % self.custom_bin_list[i])
+                            # print('%s' % self.custom_bin_list[i])
                             self.argv.append('-B' + self.custom_bin_list[i])
 
                     if self.cfg_as_update is False:
@@ -227,7 +232,7 @@ class dld_thread(threading.Thread):
                     将字节传递到self.argv(username，password，logfile，mount_point和fuse_args中的每个arg
                     将self.argv本身中的所有字符串文字更改为字节：b'fuse'，b'-f'，b'-d'等
                     '''
-                    print(f"argv:\n{self.argv}")
+                    # print(f"argv:\n{self.argv}")
                     for argument in self.argv:
                         argument = bytes(argument, encoding='utf-8')
                         arg_var[index] = argument
@@ -239,7 +244,7 @@ class dld_thread(threading.Thread):
                         efuseid1 = get_g_efuseID1()
                         efuseid2 = get_g_efuseID2()
                         self.dldtool.set_pin_array(efuseid1, efuseid2)
-                    print(f"arg_ptr{arg_ptr}-------------------")
+                    # print(f"arg_ptr{arg_ptr}-------------------")
                     dldret = self.dldtool.dldstart(len(self.argv), arg_ptr)
                     if dldret is 0:
                         bes_trace('dld failure~')
@@ -248,7 +253,7 @@ class dld_thread(threading.Thread):
             elif rcv == 'MSG_DLD_END':
                 bes_trace('dld_thread recv MSG_DLD_END')
                 self.dispatch_pip_msg_terminated()
-                self.stopped = True
+                self.stopped = True                 # 停止
                 break
             else:
                 bes_trace('dld_thread rcv ERRORMSG.')
@@ -265,7 +270,7 @@ class dld_thread(threading.Thread):
 
 class dld_courier(threading.Thread):
     """
-        烧录传输进程
+        烧录文件加载进程
     """
     encrypt_data = None
 
@@ -281,7 +286,7 @@ class dld_courier(threading.Thread):
 
     def run(self):
         while True:
-            time.sleep(0.05)
+            time.sleep(0.03)
             bes_trace('dld_courier start..........\n')
             msg_description = self.job['childconn4dldstop'].recv()  # 缓冲区
             if msg_description[0] == 'MSG_DLD_STOP':
@@ -324,6 +329,7 @@ class DldProcess(multiprocessing.Process):
     def run(self):
         self.dldtool = cdll.LoadLibrary('transferdll.dll')                  # dldtool加载升级封装工具dll
         port_num = self.job['portnum']                                      # 获取当前job的串口号
+
         dld_courier_thread = dld_courier(self.job, self.dldtool)
         dld_courier_thread.start()
         my_dld_thread = dld_thread(self.job, port_num, self.sector_update_flag, self.connector_switch,
@@ -335,4 +341,4 @@ class DldProcess(multiprocessing.Process):
         dld_courier_thread.join()
         my_dld_thread.join()
         bes_trace('\nsubprocess run over...\n')
-# okay decompiling dld_subprocess.pyc
+

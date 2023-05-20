@@ -1,0 +1,5 @@
+pyqt5==5.15.9
+pyserial==3.5
+pywin32==306
+pycryptodome==3.17
+cryptography==40.0.2

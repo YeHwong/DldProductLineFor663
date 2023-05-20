@@ -132,11 +132,11 @@ class BesDldMainWnd(QMainWindow):
         else:
             encrypt_on = xml_encrypt_is_on()
             if encrypt_on is True:
-                self.setWindowTitle(str_dldtool_encrypt_title[self.lang_set])
+                self.setWindowTitle(str_dldtool_encrypt_title[self.lang_set])  # 设置窗口标题
             else:
                 self.setWindowTitle(str_dldtool_title[self.lang_set])
-            self.setWindowIcon(QIcon('images/download.png'))
-            self.menu = self.menuBar()
+            self.setWindowIcon(QIcon('images/download.png'))                     # 设置窗口图标
+            self.menu = self.menuBar()                          # 添加菜单栏
             self.operate_menu = self.menu.addMenu(str_operate[self.lang_set])
             self.actionStart_all_menu = self.operate_menu.addAction(str_start_all[self.lang_set])
             self.actionStart_all_menu.setIcon(QIcon('images/start.png'))
@@ -168,6 +168,7 @@ class BesDldMainWnd(QMainWindow):
             self.actionAbout.setIcon(QIcon('images/about.png'))
             self.actionAbout.triggered.connect(self.about)
             # self.connect(self.actionAbout, SIGNAL('triggered()'), self.about)
+
             self.statusBar()
             self.toolbar1 = self.addToolBar(str_start_all[self.lang_set])
             self.actionStart_all = self.toolbar1.addAction(str_start_all[self.lang_set])
@@ -226,7 +227,7 @@ class BesDldMainWnd(QMainWindow):
             self.txtbrws_result_info.setEnabled(False)
             self.txtbrws_result_info.setFrameStyle(QFrame.Panel | QFrame.Sunken)
             # self.txtbrws_result_info.setFixedHeight(50)
-            if encrypt_on is True:      # 加密模式*******
+            if encrypt_on is True:  # 加密模式*******
                 font = QFont()
                 font.setBold(True)
                 font.setPointSize(40)
@@ -429,10 +430,15 @@ class BesDldMainWnd(QMainWindow):
         string_display = param[1]
         guistatus = getSTATE(job)
         if string_display == 'Idle':
-            guistatus.setText(str_idle[self.lang_set])
-            temp_palette = guistatus.palette()
-            temp_palette.setColor(guistatus.backgroundRole(), QColor(222, 222, 222))
-            guistatus.setPalette(temp_palette)
+            def task():
+                time.sleep(20)
+                if string_display == 'Idle':
+                    guistatus.setText(str_idle[self.lang_set])
+                    temp_palette = guistatus.palette()
+                    temp_palette.setColor(guistatus.backgroundRole(), QColor(222, 222, 222))
+                    guistatus.setPalette(temp_palette)
+            t1 = threading.Thread(target=task, name='Idle reflash')
+            t1.start()
         elif string_display == 'Burn Succeed':
             guistatus.setText(str_success[self.lang_set])
             temp_palette = guistatus.palette()
@@ -500,7 +506,8 @@ class BesDldMainWnd(QMainWindow):
 
     def show_dld_result_info(self):
         count_complete, count_failure = get_dld_result()
-        display_text = str_complete_count[self.lang_set] + str(count_complete) + '\n' + str_failure_count[self.lang_set] + str(
+        display_text = str_complete_count[self.lang_set] + str(count_complete) + '\n' + str_failure_count[
+            self.lang_set] + str(
             count_failure)
         if get_max_burn_num_flag():
             if xml_get_max_burn_num_enable():
@@ -523,7 +530,8 @@ class BesDldMainWnd(QMainWindow):
         reset_dld_result()
         restore_dldresult_to_xml()
         count_complete, count_failure = get_dld_result()
-        display_text = str_complete_count[self.lang_set] + str(count_complete) + '\n' + str_failure_count[self.lang_set] + str(
+        display_text = str_complete_count[self.lang_set] + str(count_complete) + '\n' + str_failure_count[
+            self.lang_set] + str(
             count_failure)
         if get_max_burn_num_flag():
             if xml_get_max_burn_num_enable():
@@ -535,10 +543,11 @@ class BesDldMainWnd(QMainWindow):
         self.txtbrws_result_info.setText(display_text)
 
     def setTableContents(self):
-        self.tableWidget.setHorizontalHeaderLabels([str_port_num[self.lang_set], str_com[self.lang_set], str_progress[self.lang_set],
-                                                    str_bt_addr[self.lang_set], str_ble_addr[self.lang_set], str_status[self.lang_set],
-                                                    str_elapse[self.lang_set],
-                                                    str_calib_value[self.lang_set]])
+        self.tableWidget.setHorizontalHeaderLabels(
+            [str_port_num[self.lang_set], str_com[self.lang_set], str_progress[self.lang_set],
+             str_bt_addr[self.lang_set], str_ble_addr[self.lang_set], str_status[self.lang_set],
+             str_elapse[self.lang_set],
+             str_calib_value[self.lang_set]])
         self.tableWidget.setColumnWidth(0, self.width() / 12)
         self.tableWidget.setColumnWidth(1, self.width() * 1 / 12)
         self.tableWidget.setColumnWidth(2, self.width() * 7.5 / 12)
@@ -558,7 +567,7 @@ class BesDldMainWnd(QMainWindow):
             self.tableWidget.setItem(i, 7, QTableWidgetItem(''))
             self.tableWidget.setRowHeight(i, self.height() / 12)
 
-        self.tableWidget.horizontalHeader().setStretchLastSection(True)
+        self.tableWidget.horizontalHeader().setStretchLastSection(True)   # 设置拉伸最后一节
         self.tableWidget.setGeometry(1, 1, self.width() * 8 / 10 - 5, self.height() / 2.5)
         self.txtbrws_cfg_info.setGeometry(1, 2 + self.height() / 2.5, self.width() * 8 / 10, self.height() / 12)
         self.txtbrws_result_info.setGeometry(1, 3 + self.height() / 2.5 + self.height() / 14,
@@ -612,10 +621,11 @@ class BesDldMainWnd(QMainWindow):
         global bar_array
         global calib_value_array
         self.tableWidget.clear()
-        self.tableWidget.setHorizontalHeaderLabels([str_port_num[self.lang_set], str_com[self.lang_set], str_progress[self.lang_set],
-                                                    str_bt_addr[self.lang_set], str_ble_addr[self.lang_set], str_status[self.lang_set],
-                                                    str_elapse[self.lang_set],
-                                                    str_calib_value[self.lang_set]])
+        self.tableWidget.setHorizontalHeaderLabels(
+            [str_port_num[self.lang_set], str_com[self.lang_set], str_progress[self.lang_set],
+             str_bt_addr[self.lang_set], str_ble_addr[self.lang_set], str_status[self.lang_set],
+             str_elapse[self.lang_set],
+             str_calib_value[self.lang_set]])
         for i in range(8):
             self.tableWidget.setItem(i, 0, QTableWidgetItem(''))
             self.tableWidget.setItem(i, 1, QTableWidgetItem(''))
@@ -830,8 +840,8 @@ class BesDldMainWnd(QMainWindow):
                         factory_bin_name = dld_g.JOBS[index]['factorybin']
                         bt_addr_dis, ble_addr_dis, calib_value, sn = dld_sector_gen(factory_bin_name, True)
                         dld_g.JOBS[index]['bt_addr_pack'] = struct.pack('<6B', bt_addr_dis[5], bt_addr_dis[4],
-                                                                       bt_addr_dis[3], bt_addr_dis[2], bt_addr_dis[1],
-                                                                       bt_addr_dis[0])
+                                                                        bt_addr_dis[3], bt_addr_dis[2], bt_addr_dis[1],
+                                                                        bt_addr_dis[0])
                         dld_g.JOBS[index]['btaddrtext'] = '%02X:%02X:%02X:%02X:%02X:%02X' % (bt_addr_dis[0],
                                                                                              bt_addr_dis[1],
                                                                                              bt_addr_dis[2],
@@ -973,7 +983,8 @@ class BesDldMainWnd(QMainWindow):
         return
 
     def closeEvent(self, event):
-        reply = QMessageBox.question(self, str_quit[self.lang_set], str_quit_message[self.lang_set], QMessageBox.Yes | QMessageBox.No)
+        reply = QMessageBox.question(self, str_quit[self.lang_set], str_quit_message[self.lang_set],
+                                     QMessageBox.Yes | QMessageBox.No)
         if reply == QMessageBox.Yes:
             self.gen_unuse_addr()
             restore_dldresult_to_xml()

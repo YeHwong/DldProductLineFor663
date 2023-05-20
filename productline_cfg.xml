@@ -11,7 +11,7 @@
     <baudrate>921600</baudrate>
 	<burn switch="1">
         <app>1</app>
-		<burnpath_1>D:/BTE-670/DVT/ROCKET_A.1.1.0.16_20230506/DEBUG_BIN/ROCKET_A.1.1.0.16_20230506.bin</burnpath_1>
+		<burnpath_1>D:/BTE-670/DVT/rocket_1.1.0.20_0515_2242.bin</burnpath_1>
         <hash1>0</hash1>
 		<verify_hash_1 />
         <otaboot>0</otaboot>
@@ -87,8 +87,8 @@
 		<connector>0</connector>
 	</factorymode>
 	<dld_result>
-		<complete>0</complete>
-		<failure>0</failure>
+		<complete>8</complete>
+		<failure>4</failure>
 	</dld_result>
     <unuse_bt_addr />
     <unuse_ble_addr />
