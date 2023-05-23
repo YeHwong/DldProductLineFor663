@@ -10,16 +10,14 @@ import copy
 import multiprocessing
 import struct
 from ctypes import *
-import ctypes
-import serial
 
 from Crypto.Signature import PKCS1_v1_5 as Signature_pkcs1_v1_5
 from cryptography.hazmat.primitives.hashes import SHA256
 
 from dld_global import *
 from dld_global import GlobModule
-from PyQt5.Qt import QObject
 
+global g_ser
 
 class dld_thread(threading.Thread):
     """
@@ -61,6 +59,7 @@ class dld_thread(threading.Thread):
         threading.Thread.__init__(self)
         self.job = job
         self.com = str(com)
+        self.lock = threading.Lock()
         self.stopped = False
         self.r_file = ''
         self.f_file = ''
@@ -80,6 +79,17 @@ class dld_thread(threading.Thread):
         self.eraser_switch = eraser_switch
         self.customized_enable = customized_enable
         self.customized_addr = customized_addr
+
+        global g_ser
+        g_ser = serial.Serial()
+        g_ser.port = "COM99"  # 串口设置：串口号
+        g_ser.baudrate = 115200  # 串口设置：波特率
+        g_ser.bytesize = 8  # 串口设置：数据位
+        g_ser.parity = 'N'  # 串口设置：校验位
+        g_ser.stopbits = 1  # 串口设置：停止位
+        g_ser.timeout = 1  # 串口设置：超时时间
+        g_ser.write_timeout = 0.5  # 串口设置：写入超时
+        g_ser.inter_byte_timeout = 0.1  # 串口设置：字节间超时
 
     def dispatch_pip_msg_terminated(self):
         """dispatch_pip_msg_terminated"""
@@ -167,7 +177,7 @@ class dld_thread(threading.Thread):
     def dispatch_pip_msg_get_evt_start(self):
         """dispatch_pip_msg_get_evt_start"""
         while True:
-            time.sleep(0.05)
+            time.sleep(0.02)
             if self.stopped:
                 break
             evt = self.dldtool.get_notify_from_cext()
@@ -178,12 +188,31 @@ class dld_thread(threading.Thread):
 
         bes_trace('thread_communicate_with_chip_evt_dispatch over')
 
+    def bud_reset(self, port_id):
+        self.lock.acquire()
+        global g_ser
+        try:
+            g_ser.open()
+            print("port COM99 is open")
+            g_ser.write("port{}".format(port_id).encode("UTF-8"))
+            g_ser.close()
+        except Exception as e:
+            print("port Error" + str(e))
+            # QMessageBox.critical(self, "port Error", "此串口不能被打开！")
+        g_ser.close()
+        self.lock.release()
+
     def run(self):
         dld_com = self.com
         # dld_com = self.com.decode('utf-8').encode('gbk')
 
-        self.dldtool.handle_buildinfo_to_extend(self.f_file)
         while True:
+            st = time.time()
+            time.sleep(0.5)
+            port_id = self.job['ID']
+            resetThread = threading.Thread(target=self.bud_reset, kwargs={"port_id": port_id})
+            resetThread.start()
+            self.dldtool.handle_buildinfo_to_extend(self.f_file)
             time.sleep(0.05)
             rcv = self.job['cconn4dldstart'].recv()
             bes_trace('subprocess dld_thread~~~~~~~~~~~~~~~~~%s~~~~~~~~~~~~~~' % rcv)
@@ -250,6 +279,11 @@ class dld_thread(threading.Thread):
                         bes_trace('dld failure~')
                         break
                     self.dispatch_pip_msg_get_evt_start()
+                    # et = time.time()
+                    # dt = et - st
+                    # print(dt)
+                    # if dt > 5:
+                    #     time.sleep(10)
             elif rcv == 'MSG_DLD_END':
                 bes_trace('dld_thread recv MSG_DLD_END')
                 self.dispatch_pip_msg_terminated()
@@ -259,6 +293,7 @@ class dld_thread(threading.Thread):
                 bes_trace('dld_thread rcv ERRORMSG.')
 
         bes_trace('\ndld_thread over...\n')
+
 
     def set_file(self, r_file, f_file, fb_file, app_switch, ota_boot_switch):
         self.r_file = r_file
@@ -286,7 +321,7 @@ class dld_courier(threading.Thread):
 
     def run(self):
         while True:
-            time.sleep(0.03)
+            time.sleep(0.02)
             bes_trace('dld_courier start..........\n')
             msg_description = self.job['childconn4dldstop'].recv()  # 缓冲区
             if msg_description[0] == 'MSG_DLD_STOP':

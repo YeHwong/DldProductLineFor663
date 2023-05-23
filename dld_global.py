@@ -12,6 +12,7 @@ import threading
 import time
 import uuid
 from ctypes import cdll, c_char
+import serial
 
 from Crypto.Cipher import AES
 from Crypto.PublicKey import RSA
@@ -26,6 +27,7 @@ G_APP_NAME = 'DLDTOOL'
 g_dlddll = None
 g_efuseID1 = 255
 g_efuseID2 = 255
+global g_ser
 ev_wm_port_open_failed = 1026
 ev_wm_port_open_succeed = 1027
 ev_wm_sync_wait = 1028
@@ -151,7 +153,6 @@ def initglobal():
     mainproc_monitor_threads_mutex_init()
     dld_path = os.getcwd() + "\\transferdll.dll"
     g_dlddll = cdll.LoadLibrary(dld_path)      # 调用dll文件
-
 
 def set_g_efuseID1(efuseid):
     global g_efuseID1

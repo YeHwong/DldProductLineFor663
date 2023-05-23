@@ -178,6 +178,8 @@ class DldProgressMonitor(threading.Thread):
         self.time_cancel = True
         save_log_to_file('$$$$$$$$$$$$$$$$$$$$$$$  BURN SUCCESS. btaddr:%s  bleaddr%s sn:%s\n\n' % (
             self.job['btaddrtext'], self.job['bleaddrtext'], self.job['sntext']))
+
+        time.sleep(15)
         threads_mutex = get_mainproc_monitor_mutex()
         threads_mutex.acquire()
         if xml_get_update_sector_enable() == '1' and xml_get_update_btaddr_enable() == 1:

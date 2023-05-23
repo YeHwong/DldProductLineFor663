@@ -429,16 +429,21 @@ class BesDldMainWnd(QMainWindow):
         job = param[0]
         string_display = param[1]
         guistatus = getSTATE(job)
+        # if string_display == 'Idle':
+        #     def task():
+        #         time.sleep(20)
+        #         if string_display == 'Idle':
+        #             guistatus.setText(str_idle[self.lang_set])
+        #             temp_palette = guistatus.palette()
+        #             temp_palette.setColor(guistatus.backgroundRole(), QColor(222, 222, 222))
+        #             guistatus.setPalette(temp_palette)
+        #     t1 = threading.Thread(target=task, name='Idle reflash')
+        #     t1.start()
         if string_display == 'Idle':
-            def task():
-                time.sleep(20)
-                if string_display == 'Idle':
-                    guistatus.setText(str_idle[self.lang_set])
-                    temp_palette = guistatus.palette()
-                    temp_palette.setColor(guistatus.backgroundRole(), QColor(222, 222, 222))
-                    guistatus.setPalette(temp_palette)
-            t1 = threading.Thread(target=task, name='Idle reflash')
-            t1.start()
+            guistatus.setText(str_idle[self.lang_set])
+            temp_palette = guistatus.palette()
+            temp_palette.setColor(guistatus.backgroundRole(), QColor(222, 222, 222))
+            guistatus.setPalette(temp_palette)
         elif string_display == 'Burn Succeed':
             guistatus.setText(str_success[self.lang_set])
             temp_palette = guistatus.palette()
