@@ -86,7 +86,7 @@ g_using_bleaddr = []
 g_burnappota_only = '1'
 g_baudrate = '921600'
 g_rest_burn_num = 0
-
+g_delay_time = 0
 
 def get_device_address_gen_type():
     global g_dev_addr_gen_type
@@ -113,6 +113,11 @@ def set_rest_burn_num(num):
 def xml_get_sn_gen_type():
     global g_sn_gen_type
     return g_sn_gen_type
+
+
+def xml_get_delay_time():
+    global g_delay_time
+    return g_delay_time
 
 
 def xml_get_update_Customized_enable():
@@ -855,6 +860,7 @@ def xml_doc_parse():
     global g_verifycrc1_switch
     global g_verifycrc2_switch
     global root_parse
+    global g_delay_time
     try:
         doc_parse = Et.parse('productline_cfg.xml')
     except:
@@ -865,6 +871,7 @@ def xml_doc_parse():
     g_cfgasupdate_flag = root_parse.find('cfgasupdate').text
     g_burnappota_only = root_parse.find('burnappota_only').text
     g_baudrate = root_parse.find('baudrate').text
+    g_delay_time = root_parse.find('delay_time').text
     if root_parse.find('encrypt_on').text == '1':
         g_encrypt_on = True
     else:

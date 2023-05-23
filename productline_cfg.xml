@@ -9,6 +9,7 @@
     <burnappota_only>1</burnappota_only>
 	<cfgasupdate>0</cfgasupdate>
     <baudrate>921600</baudrate>
+	<delay_time>15</delay_time>
 	<burn switch="1">
         <app>1</app>
 		<burnpath_1>D:/BTE-663/update/beethoven_1.1.0.57(USE_TRACE_ID)_20220512.bin</burnpath_1>
