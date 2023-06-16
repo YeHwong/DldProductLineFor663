@@ -177,7 +177,7 @@ class dld_thread(threading.Thread):
     def dispatch_pip_msg_get_evt_start(self):
         """dispatch_pip_msg_get_evt_start"""
         while True:
-            time.sleep(0.02)
+            time.sleep(0.05)
             if self.stopped:
                 break
             evt = self.dldtool.get_notify_from_cext()
@@ -193,7 +193,6 @@ class dld_thread(threading.Thread):
         global g_ser
         try:
             g_ser.open()
-            print("port COM99 is open")
             g_ser.write("port{}".format(port_id).encode("UTF-8"))
             g_ser.close()
         except Exception as e:
@@ -211,7 +210,7 @@ class dld_thread(threading.Thread):
             time.sleep(0.5)
             port_id = self.job['ID']
             resetThread = threading.Thread(target=self.bud_reset, kwargs={"port_id": port_id})
-            resetThread.start()
+            resetThread.start()                                          # 自定义的耳机复位进程
             self.dldtool.handle_buildinfo_to_extend(self.f_file)
             time.sleep(0.05)
             rcv = self.job['cconn4dldstart'].recv()
@@ -239,7 +238,7 @@ class dld_thread(threading.Thread):
                         self.argv.append('-w' + str(self.burn_field_enable_value))
                     for i in range(1, len(self.custom_bin_list)):
                         if self.custom_bin_list[i] != '':
-                            # print('%s' % self.custom_bin_list[i])
+                            print(self.custom_bin_list[i])
                             self.argv.append('-B' + self.custom_bin_list[i])
 
                     if self.cfg_as_update is False:
@@ -249,6 +248,7 @@ class dld_thread(threading.Thread):
                     else:
                         self.argv.append('-P1')
                     if self.customized_enable == 1:
+                        print(self.customized_addr)
                         self.argv.append('-K' + self.customized_addr)
                     self.argv.append('-e' + self.eraser_switch)
                     bes_trace(self.argv)
@@ -260,30 +260,25 @@ class dld_thread(threading.Thread):
                     '-d'等都创建了str实例。 为了获取bytes实例，您将需要同时执行以下两项操作：
                     将字节传递到self.argv(username，password，logfile，mount_point和fuse_args中的每个arg
                     将self.argv本身中的所有字符串文字更改为字节：b'fuse'，b'-f'，b'-d'等
+                        ***实际上将这堆字符串转成二进制的bytes后传给dll就能用。***
                     '''
-                    # print(f"argv:\n{self.argv}")
                     for argument in self.argv:
                         argument = bytes(argument, encoding='utf-8')
                         arg_var[index] = argument
                         index += 1
 
-                    arg_ptr = cast(arg_var, POINTER(c_char_p))
+                    print('*********{}*****88****8'.format(self.argv))
+                    # arg_ptr = cast(arg_var, POINTER(c_char_p))
                     if self.encrypt_on is True:
                         self.dldtool.dldtool_cfg_set(1)
                         efuseid1 = get_g_efuseID1()
                         efuseid2 = get_g_efuseID2()
                         self.dldtool.set_pin_array(efuseid1, efuseid2)
-                    # print(f"arg_ptr{arg_ptr}-------------------")
-                    dldret = self.dldtool.dldstart(len(self.argv), arg_ptr)
+                    dldret = self.dldtool.dldstart(len(self.argv), arg_var)
                     if dldret is 0:
                         bes_trace('dld failure~')
                         break
                     self.dispatch_pip_msg_get_evt_start()
-                    # et = time.time()
-                    # dt = et - st
-                    # print(dt)
-                    # if dt > 5:
-                    #     time.sleep(10)
             elif rcv == 'MSG_DLD_END':
                 bes_trace('dld_thread recv MSG_DLD_END')
                 self.dispatch_pip_msg_terminated()
@@ -321,7 +316,7 @@ class dld_courier(threading.Thread):
 
     def run(self):
         while True:
-            time.sleep(0.02)
+            time.sleep(0.05)
             bes_trace('dld_courier start..........\n')
             msg_description = self.job['childconn4dldstop'].recv()  # 缓冲区
             if msg_description[0] == 'MSG_DLD_STOP':

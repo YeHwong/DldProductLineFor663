@@ -288,7 +288,6 @@ class BesDldMainWnd(QMainWindow):
             binfile, otafile = xml_getxmlcfg_burnpath()
             crc_text = self.getFileCRCText(binfile)
             if crc_text.lower() != cfg_verify_crc1.lower():
-                # print(crc_text, cfg_verify_crc1)
                 return 'crc error'
         cfg_otaboot_switch = xml_get_otaboot_switch()
         if cfg_otaboot_switch == '1':
@@ -301,7 +300,6 @@ class BesDldMainWnd(QMainWindow):
             binfile, otafile = xml_getxmlcfg_burnpath()
             crc_text = self.getFileCRCText(otafile)
             if crc_text.lower() != cfg_verify_crc2.lower():
-                # print(crc_text, cfg_verify_crc2)
                 return 'crc error'
         return 'success'
 

@@ -1,3 +1,13 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# @Time: 2023-02-17 14:26:18
+# @File: dld_productlinecfg.py
+# @Author: YeHwong
+# @Email: 598316810@qq.com
+# @Version ：1.1.0
+# 修复文件选择后闪退BUG
+
+
 from PyQt5 import uic
 from PyQt5.QtWidgets import QFileDialog, QDialog
 
@@ -261,7 +271,7 @@ class ProductlineCfg(QDialog, Ui_productlinecfg_window):
 
     def browse_bin_path_1(self):
         self.binpath_1 = QFileDialog.getOpenFileName(self, 'Select Flash File', '', '*.bin')
-        print(f'binpath_1:{self.binpath_1}')
+        # print(f'binpath_1:{self.binpath_1}')
         if len(self.binpath_1) != 0:
             get_dlddll().handle_buildinfo_to_extend(str(self.binpath_1))
             buf = (c_char * 249)()
@@ -272,7 +282,7 @@ class ProductlineCfg(QDialog, Ui_productlinecfg_window):
                     namestr = namestr + str(buf[i])
 
                 self.update_bt_name_text(namestr, True)
-            print(self.binpath_1)
+            # print(self.binpath_1)
             self.lineedit_bin_path_1.setText(self.binpath_1[0])
             if self.chkbox_filename.isChecked() and self.checkbox_update_sector.isChecked():
                 strlist = self.binpath_1.split('/')
@@ -310,25 +320,26 @@ class ProductlineCfg(QDialog, Ui_productlinecfg_window):
         self.custom_bin1_path = QFileDialog.getOpenFileName(self, 'Selecct bin', '', '*.bin')
         if len(self.custom_bin1_path) == 0:
             return
-        self.lineedit_custom_bin1.setText(self.custom_bin1_path)
+        print(self.custom_bin1_path)
+        self.lineedit_custom_bin1.setText(self.custom_bin1_path[0])    # BIN修复文件选择后闪退BUG
 
     def browse_custom_bin2(self):
         self.custom_bin2_path = QFileDialog.getOpenFileName(self, 'Selecct bin', '', '*.bin')
         if len(self.custom_bin2_path) == 0:
             return
-        self.lineedit_custom_bin2.setText(self.custom_bin2_path)
+        self.lineedit_custom_bin2.setText(self.custom_bin2_path[0])
 
     def browse_custom_bin3(self):
         self.custom_bin3_path = QFileDialog.getOpenFileName(self, 'Selecct bin', '', '*.bin')
         if len(self.custom_bin3_path) == 0:
             return
-        self.lineedit_custom_bin3.setText(self.custom_bin3_path)
+        self.lineedit_custom_bin3.setText(self.custom_bin3_path[0])
 
     def browse_custom_bin4(self):
         self.custom_bin4_path = QFileDialog.getOpenFileName(self, 'Selecct bin', '', '*.bin')
         if len(self.custom_bin4_path) == 0:
             return
-        self.lineedit_custom_bin4.setText(self.custom_bin4_path)
+        self.lineedit_custom_bin4.setText(self.custom_bin4_path[0])
 
     def browse_bin_path_2(self):
         """

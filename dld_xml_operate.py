@@ -774,7 +774,6 @@ def xml_mod_for_encrypt_mode():
     try:
         docparse = Et.parse('productline_cfg.xml')      # 解析productline_cfg文件
     except Exception as e:
-        # print(e)
         return e
 
     root_parse = docparse.getroot()
